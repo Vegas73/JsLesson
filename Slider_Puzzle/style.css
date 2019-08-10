@@ -1,0 +1,21 @@
+#reset {
+	border:solid 1px gray;
+	margin-top: 5px;
+}
+	
+td {				
+	text-align:center;				
+	font-family:Times New Roman;
+	vertical-align: middle;				
+}
+#box td {
+	border:solid 1px gray;
+	text-align:center;
+	font-size:40px;
+	font-family:Times New Roman;
+	width: 55px;
+	height: 55px;
+}
+#box td:hover {
+	cursor: hand;
+}
