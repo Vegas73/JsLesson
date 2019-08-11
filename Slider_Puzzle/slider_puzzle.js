@@ -23,6 +23,14 @@ function newGame(){
 				arr[i][j] = "";
 		}
 	}
+	
+//функция замещения костяшек :	
+
+function swap(arr,i1,j1,i2,j2){				
+	a = arr[i1][j1];
+	arr[i1][j1] = arr[i2][j2];
+	arr[i2][j2] = a;
+}
 
 	//перемешивание массива :
 
@@ -30,10 +38,10 @@ function newGame(){
 	ej = 3;
 	for(i = 0; i < 1600; ++i)
 		switch(Math.round(3*Math.random())){
-			case 0: if(ei != 0) swap(arr,ei,ej,--ei,ej); break; // верх
-			case 1: if(ej != 3) swap(arr,ei,ej,ei, ++ej); break; // право
-			case 2: if(ei != 3) swap(arr,ei,ej,++ei,ej); break; // низ
-			case 3: if(ej != 0) swap(arr,ei,ej,ei,--ej); // лево
+			case 0: if(ei != 0) swap(arr,ei,ej,--ei,ej); break; // вверх
+			case 1: if(ej != 3) swap(arr,ei,ej,ei, ++ej); break; // вправо
+			case 2: if(ei != 3) swap(arr,ei,ej,++ei,ej); break; // вниз
+			case 3: if(ej != 0) swap(arr,ei,ej,ei,--ej); // влево
 		}
 
 	//таблица с элементами :
@@ -57,13 +65,7 @@ function newGame(){
 	box.appendChild(table);	
 }
 
-//функция замещения костяшек :	
 
-function swap(arr,i1,j1,i2,j2){				
-	a = arr[i1][j1];
-	arr[i1][j1] = arr[i2][j2];
-	arr[i2][j2] = a;
-}
 
 //функция смещения костяшек :
 
