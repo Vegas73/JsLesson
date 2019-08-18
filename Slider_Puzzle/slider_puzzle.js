@@ -2,7 +2,7 @@ var arr = [], box, ei,ej;
 
 
 //загрузка страницы :
-window.onload = function() {				
+window.onload = () => {				
 	box = document.getElementById("box");
 	newGame();				
 	document.getElementById("reset").onclick = newGame;						
@@ -36,7 +36,7 @@ function swap(arr,i1,j1,i2,j2){
 
 	ei = 3;
 	ej = 3;
-	for(i = 0; i < 1600; ++i)
+	for(i = 0; i < 1800; ++i)
 		switch(Math.round(3*Math.random())){
 			case 0: if(ei != 0) swap(arr,ei,ej,--ei,ej); break; // вверх
 			case 1: if(ej != 3) swap(arr,ei,ej,ei, ++ej); break; // вправо
