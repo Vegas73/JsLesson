@@ -10,10 +10,8 @@ window.onload = () => {
 
 //функция игрового поля :
 
-function newGame(){	
-
+newGame = () => {	
 	//массив с костяшками и пустым полем :	
-
 	for(i = 0; i < 4; ++i){
 		arr[i] = []
 		for(j = 0; j < 4; ++j){
@@ -22,18 +20,14 @@ function newGame(){
 			else
 				arr[i][j] = "";
 		}
-	}
-	
+	}	
 //функция замещения костяшек :	
-
-function swap(arr,i1,j1,i2,j2){				
-	a = arr[i1][j1];
-	arr[i1][j1] = arr[i2][j2];
-	arr[i2][j2] = a;
-}
-
+	swap = (arr,i1,j1,i2,j2) => {				
+		a = arr[i1][j1];
+		arr[i1][j1] = arr[i2][j2];
+		arr[i2][j2] = a;
+	}
 	//перемешивание массива :
-
 	ei = 3;
 	ej = 3;
 	for(i = 0; i < 1800; ++i)
@@ -43,9 +37,7 @@ function swap(arr,i1,j1,i2,j2){
 			case 2: if(ei != 3) swap(arr,ei,ej,++ei,ej); break; // вниз
 			case 3: if(ej != 0) swap(arr,ei,ej,ei,--ej); // влево
 		}
-
 	//таблица с элементами :
-
 	var table = document.createElement("table"),
 		tbody = document.createElement("tbody");					
 	table.appendChild(tbody);
@@ -69,7 +61,7 @@ function swap(arr,i1,j1,i2,j2){
 
 //функция смещения костяшек :
 
-function cellClick(event) {
+cellClick = (event) => {
 	var event = event || window.event,
 		el = event.srcElement || event.target,
 		i = el.id.charAt(0),
