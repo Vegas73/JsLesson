@@ -8,6 +8,14 @@ window.onload = () => {
 	document.getElementById("reset").onclick = newGame;						
 }
 
+//функция замещения костяшек :	
+
+	swap = (arr,i1,j1,i2,j2) => {				
+		a = arr[i1][j1];
+		arr[i1][j1] = arr[i2][j2];
+		arr[i2][j2] = a;
+	}
+
 //функция игрового поля :
 
 newGame = () => {	
@@ -20,12 +28,6 @@ newGame = () => {
 			else
 				arr[i][j] = "";
 		}
-	}	
-//функция замещения костяшек :	
-	swap = (arr,i1,j1,i2,j2) => {				
-		a = arr[i1][j1];
-		arr[i1][j1] = arr[i2][j2];
-		arr[i2][j2] = a;
 	}
 	//перемешивание массива :
 	ei = 3;
