@@ -1,4 +1,4 @@
-var arr = [], box, ei,ej;	
+let arr = [], box, ei,ej;	
 
 
 //загрузка страницы :
@@ -38,13 +38,13 @@ newGame = () => {
 			case 3: if(ej != 0) swap(arr,ei,ej,ei,--ej); // влево
 		}
 	//таблица с элементами :
-	var table = document.createElement("table"),
+	let table = document.createElement("table"),
 		tbody = document.createElement("tbody");					
 	table.appendChild(tbody);
 	for(i = 0; i < 4; ++i){
-		var row = document.createElement("tr");
+		let row = document.createElement("tr");
 		for(j = 0; j < 4; ++j){
-			var cell = document.createElement("td");
+			let cell = document.createElement("td");
 				cell.id = i + " " + j;
 				cell.onclick = cellClick;
 				cell.innerHTML = arr[i][j];
@@ -72,7 +72,7 @@ cellClick = (event) => {
 		el.innerHTML = "";
 		ei = i;
 		ej = j;
-		var q = true;
+		let q = true;
 		//проверка на выигрышную комбинацию :
 		for(i = 0; i < 4; ++i)
 			for(j = 0; j < 4; ++j)
