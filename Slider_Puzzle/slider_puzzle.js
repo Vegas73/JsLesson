@@ -1,87 +1,42 @@
-let arr = [], box, ei,ej;	
 
+window.onload=function(){
+      
+let fifteen = {
+  Move: {up: -4, left: -1, down: 4, right: 1},
+  order: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function() { return Math.random()-.5; }).concat(0),
+  hole: 15,
+  isCompleted: function() { return !this.order.some(function(item, i) { return item > 0 && item-1 !== i; }); },
+  go: function(move) {
+    let index = this.hole + move;
+    if (!this.order[index]) return false;
+    if (move == fifteen.Move.left || move == fifteen.Move.right)
+      if (Math.floor(this.hole/4) !== Math.floor(index/4)) return false;
+    this.swap(index, this.hole);
+    this.hole = index;
+    return true; },
+  swap: function(i1, i2) { let t = this.order[i1]; this.order[i1] = this.order[i2]; this.order[i2] = t; },
+  solvable: function(a) {
+    for (var kDisorder = 0, i = 1, len = a.length-1; i < len; i++)
+      for (var j = i-1; j >= 0; j--) if (a[j] > a[i]) kDisorder++;
+    return !(kDisorder % 2); } };
+if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
+let box = document.body.appendChild(document.createElement('div'));
+for (var i = 0; i < 16; i++) box.appendChild(document.createElement('div'));
+window.addEventListener('keydown', function(e) {
+  if (fifteen.go(fifteen.Move[{39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]])) {
+    draw(); if (fifteen.isCompleted()) {
+      box.style.backgroundColor = "gold";
+      window.removeEventListener('keydown', arguments.callee); } }});
+draw();
+function draw() {
+  for (var i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
+    tile.textContent = fifteen.order[i]; tile.style.visibility = fifteen.order[i]? 'visible' : 'hidden'; } };
 
-//загрузка страницы :
-window.onload = () => {				
-	box = document.getElementById("box");
-	newGame();				
-	document.getElementById("reset").onclick = newGame;						
-}
-
-//функция замещения костяшек :	
-
-	swap = (arr,i1,j1,i2,j2) => {				
-		a = arr[i1][j1];
-		arr[i1][j1] = arr[i2][j2];
-		arr[i2][j2] = a;
-	}
-
-//функция игрового поля :
-
-newGame = () => {	
-	//массив с костяшками и пустым полем :	
-	for(i = 0; i < 4; ++i){
-		arr[i] = []
-		for(j = 0; j < 4; ++j){
-			if(i + j != 6)
-				arr[i][j] = i*4 + j + 1;
-			else
-				arr[i][j] = "";
-		}
-	}
-	//перемешивание массива :
-	ei = 3;
-	ej = 3;
-	for(i = 0; i < 1800; ++i)
-		switch(Math.round(3*Math.random())){
-			case 0: if(ei != 0) swap(arr,ei,ej,--ei,ej); break; // вверх
-			case 1: if(ej != 3) swap(arr,ei,ej,ei, ++ej); break; // вправо
-			case 2: if(ei != 3) swap(arr,ei,ej,++ei,ej); break; // вниз
-			case 3: if(ej != 0) swap(arr,ei,ej,ei,--ej); // влево
-		}
-	//таблица с элементами :
-	let table = document.createElement("table"),
-		tbody = document.createElement("tbody");					
-	table.appendChild(tbody);
-	for(i = 0; i < 4; ++i){
-		let row = document.createElement("tr");
-		for(j = 0; j < 4; ++j){
-			let cell = document.createElement("td");
-				cell.id = i + " " + j;
-				cell.onclick = cellClick;
-				cell.innerHTML = arr[i][j];
-				row.appendChild(cell);
-		}
-		tbody.appendChild(row);					
-	}
-	if(box.childNodes.length == 1)
-		box.removeChild(box.firstChild);	
-	box.appendChild(table);	
-}
-
-
-
-//функция смещения костяшек :
-
-cellClick = (event) => {
-	var event = event || window.event,
-		el = event.srcElement || event.target,
-		i = el.id.charAt(0),
-		j = el.id.charAt(2);
-	//проверка на наличии рядом пустой ячейки :
-	if((i == ei && Math.abs(j - ej) == 1) || (j == ej && Math.abs(i - ei) == 1)){					
-		document.getElementById(ei + " " + ej).innerHTML = el.innerHTML;
-		el.innerHTML = "";
-		ei = i;
-		ej = j;
-		let q = true;
-		//проверка на выигрышную комбинацию :
-		for(i = 0; i < 4; ++i)
-			for(j = 0; j < 4; ++j)
-				if(i + j != 6 && document.getElementById(i + " " + j).innerHTML != i*4 + j + 1){
-					q = false;
-					break;
-				}
-				if(q) alert("Victory!");
-			}
-}
+    }
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "zG3hV"
+      }], "*")
+    }
+    window.name = "result"
