@@ -8,42 +8,37 @@ let fifteen = {
   //пустая косташкя
   hole: 15,
   //проверка на выигрушную комбинацию
-  isCompleted: function() { 
-  	return !this.order.some(function(item, i) { return item > 0 && item-1 !== i; }); 
-  }
+  isCompleted: function() { return !this.order.some(function(item, i) { return item > 0 && item-1 !== i; }); },
   //Ход
   go: function(move) {
     let index = this.hole + move;
     if (!this.order[index]) return false;
-    //ограничение на перемещение
+    //ограничение движения
     if (move == fifteen.Move.left || move == fifteen.Move.right)
       if (Math.floor(this.hole/4) !== Math.floor(index/4)) return false;
     this.swap(index, this.hole);
     this.hole = index;
-    return true; }
-   //функция перестановки
+    return true; },
+  //перестановка костяшек
   swap: function(i1, i2) { let t = this.order[i1]; this.order[i1] = this.order[i2]; this.order[i2] = t; },
-  //проверка на возможность выйграть(не все комбинации позволяют выйграть)
+  //проверка на решаемость(не любую комбинацию можно решить)
   solvable: function(a) {
     for (var kDisorder = 0, i = 1, len = a.length-1; i < len; i++)
-      for (var j = i-1; j >= 0; j--) if (a[j] > a[i]) kDisorder++;
-    return !(kDisorder % 2); } 
-}
-//делаем пазл решаемым
+      for (let j = i-1; j >= 0; j--) if (a[j] > a[i]) kDisorder++;
+    return !(kDisorder % 2); } };
+//создание решаемой комбинации
 if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
-//Создание поля
+//создание элементов
 let box = document.body.appendChild(document.createElement('div'));
 for (let i = 0; i < 16; i++) box.appendChild(document.createElement('div'));
-//обработка нажатия
+//Оброботка нажатий
 window.addEventListener('keydown', function(e) {
   if (fifteen.go(fifteen.Move[{39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]])) {
     draw(); if (fifteen.isCompleted()) {
       box.style.backgroundColor = "gold";
-      window.removeEventListener('keydown', arguments.callee); } 
-  }
-});
-//отрисовка
-draw()
+      window.removeEventListener('keydown', arguments.callee); } }});
+//Отрисовка
+draw();
 function draw() {
   for (let i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
     tile.textContent = fifteen.order[i]; tile.style.visibility = fifteen.order[i]? 'visible' : 'hidden'; } };
