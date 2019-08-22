@@ -33,7 +33,7 @@ let fifteen = {
 if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
 //Создание поля
 let box = document.body.appendChild(document.createElement('div'));
-for (var i = 0; i < 16; i++) box.appendChild(document.createElement('div'));
+for (let i = 0; i < 16; i++) box.appendChild(document.createElement('div'));
 //обработка нажатия
 window.addEventListener('keydown', function(e) {
   if (fifteen.go(fifteen.Move[{39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]])) {
@@ -45,7 +45,7 @@ window.addEventListener('keydown', function(e) {
 //отрисовка
 draw()
 function draw() {
-  for (var i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
+  for (let i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
     tile.textContent = fifteen.order[i]; tile.style.visibility = fifteen.order[i]? 'visible' : 'hidden'; } };
 
     }
