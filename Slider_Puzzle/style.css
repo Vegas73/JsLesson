@@ -1,21 +1,17 @@
-#reset {
-	border:solid 1px gray;
-	margin-top: 5px;
+div {
+  margin-top: 20px;
+  width: 456px;
+  border: solid 1px transparent;
 }
-	
-td {				
-	text-align:center;				
-	font-family:Times New Roman;
-	vertical-align: middle;				
-}
-#box td {
-	border:solid 1px gray;
-	text-align:center;
-	font-size:40px;
-	font-family:Times New Roman;
-	width: 55px;
-	height: 55px;
-}
-#box td:hover {
-	cursor: hand;
+
+div > div {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border: solid 2px gray;
+  margin: 5px;
+  text-align: center;
+  font: bold 24px/100px Tahoma,sans;
+  border-radius: 10px;
+  background-color: whitesmoke;
 }
