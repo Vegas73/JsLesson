@@ -38,7 +38,9 @@ window.addEventListener('keydown', function(e) {
   if (fifteen.go(fifteen.Move[{39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]])) {
     draw(); if (fifteen.isCompleted()) {
       box.style.backgroundColor = "gold";
-      window.removeEventListener('keydown', arguments.callee); } }});
+      window.removeEventListener('keydown', arguments.callee); } 
+  }
+});
 draw()
 function draw() {
   for (var i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
