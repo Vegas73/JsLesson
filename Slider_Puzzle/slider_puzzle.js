@@ -31,9 +31,10 @@ let fifteen = {
 }
 //делаем пазл решаемым
 if (!fifteen.solvable(fifteen.order)) fifteen.swap(0, 1);
-//создание поля
+//Создание поля
 let box = document.body.appendChild(document.createElement('div'));
 for (var i = 0; i < 16; i++) box.appendChild(document.createElement('div'));
+//обработка нажатия
 window.addEventListener('keydown', function(e) {
   if (fifteen.go(fifteen.Move[{39: 'left', 37: 'right', 40: 'up', 38: 'down'}[e.keyCode]])) {
     draw(); if (fifteen.isCompleted()) {
@@ -41,6 +42,7 @@ window.addEventListener('keydown', function(e) {
       window.removeEventListener('keydown', arguments.callee); } 
   }
 });
+//отрисовка
 draw()
 function draw() {
   for (var i = 0, tile; tile = box.childNodes[i], i < 16; i++) {
